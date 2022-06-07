@@ -1,5 +1,4 @@
 import requests
-import json
 from discord import Permissions as perms
 from colorama import Fore as fore
 from datetime import datetime

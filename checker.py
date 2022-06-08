@@ -4,7 +4,7 @@ from colorama import Fore as fore
 from datetime import datetime
 import os
 
-os.system('title Ultimate Token Checker by FleshkA#9009s')
+os.system('title Ultimate Token Checker by FleshkA#9009')
 __import__("colorama").init()
 
 userheaders=lambda token: {"Authorization":token,"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36"}

@@ -4,6 +4,7 @@ from colorama import Fore as fore
 from datetime import datetime
 import os
 
+os.system('title Ultimate Token Checker by FleshkA#9009s')
 __import__("colorama").init()
 
 userheaders=lambda token: {"Authorization":token,"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36"}
@@ -156,6 +157,7 @@ def parse(tokens):
         res=requests.get('https://discord.com/api/v9/users/@me',headers=userheaders(token))
         valid=res.status_code==200
         if 'You need to verify your account in order to perform this action.' in str(requests.get('https://discord.com/api/v9/users/@me/guilds',headers=userheaders(token)).json()): valid=False
+        elif 'message' in res.json(): valid=False
 
         if valid:
             nitro=len(requests.get('https://discord.com/api/v9/users/@me/billing/subscriptions',headers=userheaders(token)).json()) > 0
@@ -166,24 +168,25 @@ def parse(tokens):
         else:
             res=requests.get('https://discord.com/api/v9/users/@me',headers=botheaders(token))
             bot=res.status_code==200
+            if 'message' in res.json(): bot=False
 
+        if valid:
+            if payment: 
+                valids.write(f'{token}\n')
+                payments.write(f'{token}\n')
+                print(f'{fore.GREEN}[+] {fore.YELLOW}{token} {fore.GREEN} | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Payment found')
+                intpayments+=1
 
-        if payment: 
-            valids.write(f'{token}\n')
-            payments.write(f'{token}\n')
-            print(f'{fore.GREEN}[+] {fore.YELLOW}{token} {fore.GREEN} | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Payment found')
-            intpayments+=1
+            elif nitro:
+                valids.write(f'{token}\n')
+                nitros.write(f'{token}\n')
+                print(f'{fore.GREEN}[+] {fore.YELLOW}{token} {fore.GREEN} | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Nitro found')
+                intnitro+=1
 
-        elif nitro:
-            valids.write(f'{token}\n')
-            nitros.write(f'{token}\n')
-            print(f'{fore.GREEN}[+] {fore.YELLOW}{token} {fore.GREEN} | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Nitro found')
-            intnitro+=1
-
-        elif valid:
-            valids.write(f'{token}\n')
-            print(f'{fore.GREEN}[+] {fore.YELLOW}{token}{fore.GREEN}  | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Valid user token')
-            intvalids+=1
+            else:
+                valids.write(f'{token}\n')
+                print(f'{fore.GREEN}[+] {fore.YELLOW}{token}{fore.GREEN}  | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Valid user token')
+                intvalids+=1
 
         elif bot:
             bots.write(f'{token}\n')

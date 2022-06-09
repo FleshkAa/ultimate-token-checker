@@ -1,15 +1,25 @@
-import requests
-from discord import Permissions as perms
-from colorama import Fore as fore
-from datetime import datetime
 import os
+clear=lambda: os.system('cls') if os.name=='nt' else os.system('clear')
 
-os.system('title Ultimate Token Checker by FleshkA#9009')
+try:
+    import requests
+    from discord import Permissions as perms
+    from colorama import Fore as fore
+    from datetime import datetime
+except:
+    if os.name=='nt': os.system('py -3 -m pip install -r requirements.txt')
+    else: os.system('python3 -m pip install -r requirements.txt')
+
+    import requests
+    from discord import Permissions as perms
+    from colorama import Fore as fore
+    from datetime import datetime
+
+if os.name=='nt': os.system('title Ultimate Token Checker by FleshkA#9009')
 __import__("colorama").init()
 
 userheaders=lambda token: {"Authorization":token,"User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36"}
 botheaders=lambda token: {"Authorization": f"Bot {token}"}
-clear=lambda: os.system('cls') if os.name=='nt' else os.system('clear')
 
 
 def check(token):
@@ -136,7 +146,7 @@ def parse(tokens):
     try:
         tokens=open(tokens,'r').read().strip().split('\n')
     except FileNotFoundError as e:
-        return f"{fore.RED} Error |{fore.RESET}No such file or directory: {fore.CYAN}{tokens}{fore.RESET}\n"
+        return f"{fore.RED} Error | {fore.RESET}No such file or directory: {fore.CYAN}{tokens}{fore.RESET}\n"
 
     dir_name=f"parsed-tokens\\parsed-{datetime.now().astimezone().strftime('%Y-%m-%d-%H-%M-%S')}"
 
@@ -202,7 +212,6 @@ def parse(tokens):
 
 
 while True:
-
     print(f'''
 {fore.CYAN}Token checker by FleshkA#9009
 {fore.RED}-------------------------------------

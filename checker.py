@@ -1,3 +1,14 @@
+"""
+█▀▀ █   █▀▀ █▀▀ █  █ █ █ █▀▀█ 
+█▀▀ █   █▀▀ ▀▀█ █▀▀█ █▀▄ █▄▄█ 
+▀   ▀▀▀ ▀▀▀ ▀▀▀ ▀  ▀ ▀ ▀ ▀  ▀
+    © Copyright 2022
+
+https://discord.com/users/906838008261664790
+Licensed under the GNU GPLv3
+
+(i dont know why i added that)
+"""
 import os
 clear=lambda: os.system('cls') if os.name=='nt' else os.system('clear')
 

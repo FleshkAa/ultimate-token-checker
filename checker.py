@@ -208,7 +208,7 @@ def parse(tokens):
             intinvalids+=1
 
 
-    return f'\n{fore.RED}---------------------------\n{fore.GREEN}All checked: {fore.YELLOW}{intvalids+intpayments+intinvalids+intbots+intnitro}\n{fore.GREEN}Valid: {fore.YELLOW}{intvalids+intpayments+intnitro}\n{fore.GREEN}Bots: {fore.YELLOW}{intbots}\n{fore.GREEN}With payments: {fore.YELLOW}{intpayments}\n{fore.GREEN}With nitro: {fore.YELLOW}{intnitro}\n{fore.GREEN}Invalid: {fore.YELLOW}{intinvalids}\n{fore.MAGENTA}All tokens was saved to {fore.CYAN}{os.getcwd()}{dir_name}{fore.MAGENTA} directory\n{fore.RED}---------------------------{fore.RESET}'
+    return f'\n{fore.RED}---------------------------\n{fore.GREEN}All checked: {fore.YELLOW}{intvalids+intpayments+intinvalids+intbots+intnitro}\n{fore.GREEN}Valid: {fore.YELLOW}{intvalids+intpayments+intnitro}\n{fore.GREEN}Bots: {fore.YELLOW}{intbots}\n{fore.GREEN}With payments: {fore.YELLOW}{intpayments}\n{fore.GREEN}With nitro: {fore.YELLOW}{intnitro}\n{fore.GREEN}Invalid: {fore.YELLOW}{intinvalids}\n{fore.MAGENTA}All tokens was saved to {fore.CYAN}{os.getcwd()}\\{dir_name}{fore.MAGENTA} directory\n{fore.RED}---------------------------{fore.RESET}'
 
 
 while True:

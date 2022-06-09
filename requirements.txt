@@ -1,0 +1,4 @@
+requests
+discord
+colorama
+datetime

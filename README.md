@@ -6,6 +6,16 @@ A multifunctional token checker that can
 4) Takes out all possible information from the token
 
 # Instruction
-Run the start.bat file and select mode
+First, if you don't have Python installed, <a href="https://www.python.org/downloads/release/python-388/">install it</a>. 
+**BE SURE TO CLICK ON "ADD PYTHON TO PATH " WHEN INSTALLING**.
+
+Next, run checker.py through the console:
+```sh
+# Windows: 
+py -3 -m checker
+# Linux\MacOS 
+python3 -m checker
+```
+And select mode
 1) In single mode, you get full information from the token
-2) In parser mode, specify the full path to the token file in the format C:\Users\user\.... and you'll get the name, id of the token in the console
+2) In parser mode, specify the full path to the token file in the format C:\Users\user.... and you'll get the name, id of the token

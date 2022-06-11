@@ -1,4 +1,4 @@
-requests
+grequests
 discord
 colorama
 datetime

@@ -29,7 +29,7 @@ if checker_py.split('\n')[0].split('=')[1]!=__version__:
         else:
             continue
 '''
-#raw link didnt updated at this why
+#raw link didnt updated at this moment why
 
 try:
     import grequests

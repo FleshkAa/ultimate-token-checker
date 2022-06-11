@@ -13,6 +13,7 @@ import os
 import requests
 clear=lambda: os.system('cls') if os.name=='nt' else os.system('clear')
 
+'''
 checker_py=requests.get('https://raw.githubusercontent.com/FleshkAa/ultimate-token-checker/main/checker.py').text
 requirements_txt=requests.get('https://raw.githubusercontent.com/FleshkAa/ultimate-token-checker/main/requirements.txt').text
 
@@ -27,6 +28,8 @@ if checker_py.split('\n')[0].split('=')[1]!=__version__:
             break
         else:
             continue
+'''
+#raw link didnt updated at this why
 
 try:
     import grequests

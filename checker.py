@@ -13,23 +13,12 @@ import os
 import requests
 clear=lambda: os.system('cls') if os.name=='nt' else os.system('clear')
 
-'''
 checker_py=requests.get('https://raw.githubusercontent.com/FleshkAa/ultimate-token-checker/main/checker.py').text
-requirements_txt=requests.get('https://raw.githubusercontent.com/FleshkAa/ultimate-token-checker/main/requirements.txt').text
+
 
 if checker_py.split('\n')[0].split('=')[1]!=__version__:
-    while True:
-        inp=input('The checker has been updated, would you like to automatically update it? (Y/N)')
-        if inp.lower()=='y':
-           with open(__file__,'w') as f: f.write(checker_py)
-           with open('requirements.txt','w') as f: f.write(requirements_txt)
-           __import__("sys").exit(input("The checker has been successfully updated! Re-run the file to use it"))
-        elif inp.lower()=='n':
-            break
-        else:
-            continue
-'''
-#raw link didnt updated at this moment why
+    print("Checker updated! If you want to update it, download it again at https://github.com/FleshkAa/ultimate-token-checker.")
+
 
 try:
     import grequests

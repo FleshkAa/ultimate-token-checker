@@ -1,3 +1,4 @@
+__version__='1.1'
 """
 █▀▀ █   █▀▀ █▀▀ █  █ █ █ █▀▀█ 
 █▀▀ █   █▀▀ ▀▀█ █▀▀█ █▀▄ █▄▄█ 
@@ -5,26 +6,46 @@
     © Copyright 2022
 
 https://discord.com/users/906838008261664790
+https://github.com/fleshkaa/
 Licensed under the GNU GPLv3
-
-(i dont know why i added that)
 """
 import os
+import requests
 clear=lambda: os.system('cls') if os.name=='nt' else os.system('clear')
 
+checker_py=requests.get('https://raw.githubusercontent.com/FleshkAa/ultimate-token-checker/main/checker.py').text
+requirements_txt=requests.get('https://raw.githubusercontent.com/FleshkAa/ultimate-token-checker/main/requirements.txt').text
+
+if checker_py.split('\n')[0].split('=')[1]!=__version__:
+    while True:
+        inp=input('The checker has been updated, would you like to automatically update it? (Y/N)')
+        if inp.lower()=='y':
+           with open(__file__,'w') as f: f.write(checker_py)
+           with open('requirements.txt','w') as f: f.write(requirements_txt)
+           __import__("sys").exit(input("The checker has been successfully updated! Re-run the file to use it"))
+        elif inp.lower()=='n':
+            break
+        else:
+            continue
+
 try:
-    import requests
+    import grequests
     from discord import Permissions as perms
     from colorama import Fore as fore
     from datetime import datetime
+    import time
 except:
     if os.name=='nt': os.system('py -3 -m pip install -r requirements.txt')
     else: os.system('python3 -m pip install -r requirements.txt')
 
+    import grequests
     import requests
     from discord import Permissions as perms
     from colorama import Fore as fore
     from datetime import datetime
+    import time
+
+
 
 if os.name=='nt': os.system('title Ultimate Token Checker by FleshkA#9009')
 __import__("colorama").init()
@@ -168,6 +189,7 @@ def parse(tokens):
     bots=open(dir_name + r'\bots.txt','a')
     nitros=open(dir_name+r'\nitro.txt','a')
 
+
     intvalids=0
     intpayments=0
     intinvalids=0
@@ -191,6 +213,7 @@ def parse(tokens):
             bot=res.status_code==200
             if 'message' in res.json(): bot=False
 
+    
         if valid:
             if payment: 
                 valids.write(f'{token}\n')
@@ -221,13 +244,57 @@ def parse(tokens):
 
     return f'\n{fore.RED}---------------------------\n{fore.GREEN}All checked: {fore.YELLOW}{intvalids+intpayments+intinvalids+intbots+intnitro}\n{fore.GREEN}Valid: {fore.YELLOW}{intvalids+intpayments+intnitro}\n{fore.GREEN}Bots: {fore.YELLOW}{intbots}\n{fore.GREEN}With payments: {fore.YELLOW}{intpayments}\n{fore.GREEN}With nitro: {fore.YELLOW}{intnitro}\n{fore.GREEN}Invalid: {fore.YELLOW}{intinvalids}\n{fore.MAGENTA}All tokens was saved to {fore.CYAN}{os.getcwd()}\\{dir_name}{fore.MAGENTA} directory\n{fore.RED}---------------------------{fore.RESET}'
 
+def fast_parse(tokens):
+    try:
+        tokens=open(tokens,'r').read().strip().split('\n')
+    except FileNotFoundError as e:
+        return f"{fore.RED} Error | {fore.RESET}No such file or directory: {fore.CYAN}{tokens}{fore.RESET}\n"
+
+    dir_name=f"fast-parsed-tokens"
+    file_name=r'\parsed-valids-' + datetime.now().astimezone().strftime('%Y-%m-%d-%H-%M-%S') + '.txt'
+    if not os.path.exists(dir_name): os.system(f'mkdir {dir_name}')
+
+    valids=open(dir_name + file_name,'a')
+    intvalids=0
+    intinvalids=0
+    position=0
+
+    for res in grequests.map([grequests.get('https://discord.com/api/v9/users/@me',headers={"Authorization": token, "User-Agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.0.0 Safari/537.36"}) for token in tokens]):
+        position+=1
+        if res.status_code==200:
+            valids.write(f'{tokens[position-1]}\n')
+            print(f'{fore.GREEN}[+] {fore.YELLOW}{tokens[position-1]} | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Valid user token')
+            intvalids+=1
+        else:
+            print(f'{fore.RED}[-] {fore.YELLOW}{tokens[position-1]}{fore.RED} | Invalid user token')
+            intinvalids+=1
+
+    return f'\n{fore.RED}---------------------------\n{fore.GREEN}All checked: {fore.YELLOW}{intvalids+intinvalids}\n{fore.GREEN}Valid: {fore.YELLOW}{intvalids}\n{fore.GREEN}Invalid: {fore.YELLOW}{intinvalids}\n{fore.MAGENTA}All tokens was saved to {fore.CYAN}{os.getcwd()}\\{dir_name + file_name}{fore.MAGENTA} file\n{fore.RED}---------------------------{fore.RESET}'
+
+
+
+
 
 while True:
     print(f'''
-{fore.CYAN}Token checker by FleshkA#9009
+{fore.CYAN}
+█  █ █   ▀▀█▀▀  ▀  █▀▄▀█ █▀▀█ ▀▀█▀▀ █▀▀  
+█  █ █     █    █  █ ▀ █ █▄▄█   █   █▀▀  
+ ▀▀▀ ▀▀▀   ▀    ▀  ▀   ▀ ▀  ▀   ▀   ▀▀▀  
+
+▀▀█▀▀ █▀▀█ █ █ █▀▀ █▀▀▄ 
+  █   █  █ █▀▄ █▀▀ █  █ 
+  ▀   ▀▀▀▀ ▀ ▀ ▀▀▀ ▀  ▀ 
+
+█▀▀ █  █ █▀▀ █▀▀ █ █ █▀▀ █▀▀█ 
+█   █▀▀█ █▀▀ █   █▀▄ █▀▀ █▄▄▀ 
+▀▀▀ ▀  ▀ ▀▀▀ ▀▀▀ ▀ ▀ ▀▀▀ ▀ ▀▀
+https://github.com/FleshkAa/ultimate-token-checker
+
 {fore.RED}-------------------------------------
 {fore.GREEN}1 - {fore.YELLOW}Token check one at a time
 {fore.GREEN}2 - {fore.YELLOW}Check all token from .txt file (tokens must be distributed via Enter button on keyboard)
+{fore.GREEN}3 - {fore.YELLOW}[BETA] Fast check all tokens from .txt file (cant check to bot,nitro, payment)
 {fore.RED}-------------------------------------{fore.RESET}
     '''.strip())
     choice=int(input(f'Choice: '))
@@ -251,3 +318,12 @@ while True:
 
         else:
             print(parse(path))
+
+    while choice==3:
+        path=input(f'Path to tokens: ')
+
+        if path=='#quit': 
+            break
+
+        else:
+            print(fast_parse(path))

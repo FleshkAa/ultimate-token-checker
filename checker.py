@@ -10,18 +10,11 @@ https://github.com/fleshkaa/
 Licensed under the GNU GPLv3
 """
 import os
-import requests
 clear=lambda: os.system('cls') if os.name=='nt' else os.system('clear')
-
-checker_py=requests.get('https://raw.githubusercontent.com/FleshkAa/ultimate-token-checker/main/checker.py').text
-
-
-if checker_py.split('\n')[0].split('=')[1]!=__version__:
-    print("Checker updated! If you want to update it, download it again at https://github.com/FleshkAa/ultimate-token-checker.")
-
 
 try:
     import grequests
+    import requests
     from discord import Permissions as perms
     from colorama import Fore as fore
     from datetime import datetime

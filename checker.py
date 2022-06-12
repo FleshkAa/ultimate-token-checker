@@ -40,12 +40,10 @@ botheaders=lambda token: {"Authorization": f"Bot {token}"}
 
 
 def check(token):
-    try:
-        headers=userheaders(token)
-        resp=requests.get('https://discord.com/api/v9/users/@me',headers=headers)
-        tokentype='User'
-    except Exception as e:
-        print(e)
+    headers=userheaders(token)
+    resp=requests.get('https://discord.com/api/v9/users/@me',headers=headers)
+    tokentype='User'
+    if resp.status_code !=200 or 'message' not in resp.json():
         try:
             headers=botheaders(token)
             resp=requests.get('https://discord.com/api/v9/users/@me',headers=headers)
@@ -56,14 +54,13 @@ def check(token):
     guilds=requests.get('https://discord.com/api/v9/users/@me/guilds',headers=headers).json()
     json=resp.json()
 
-
-    if resp.status_code==401:
-        return f'{fore.RED}{resp.status_code} Error |{fore.RESET} Invalid token\n {fore.RESET}'
-
-    elif 'You need to verify your account in order to perform this action.' in str(guilds):
-        return f'{fore.RED}{resp.status_code} Error |{fore.RESET} Locked account\n {fore.RESET}'
-
     if tokentype=='User':
+        if resp.status_code==401:
+            return f'{fore.RED}{resp.status_code} Error |{fore.RESET} Invalid token\n {fore.RESET}'
+
+        elif 'You need to verify your account in order to perform this action.' in str(guilds):
+            return f'{fore.RED}{resp.status_code} Error |{fore.RESET} Locked account\n {fore.RESET}'
+
         payments=requests.get("https://discord.com/api/v9/users/@me/billing/payment-sources",headers=headers).json()
         nitro=requests.get('https://discord.com/api/v9/users/@me/billing/subscriptions', headers=headers).json()
 
@@ -248,7 +245,7 @@ def fast_parse(tokens):
         position+=1
         if res.status_code==200:
             valids.write(f'{tokens[position-1]}\n')
-            print(f'{fore.GREEN}[+] {fore.YELLOW}{tokens[position-1]} |{fore.GREEN} {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Valid user token')
+            print(f'{fore.GREEN}[+] {fore.YELLOW}{tokens[position-1]} | {fore.GREEN}{res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Valid user token')
             intvalids+=1
         else:
             print(f'{fore.RED}[-] {fore.YELLOW}{tokens[position-1]}{fore.RED} | Invalid user token')

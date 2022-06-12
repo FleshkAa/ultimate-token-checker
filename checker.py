@@ -43,12 +43,11 @@ def check(token):
     headers=userheaders(token)
     resp=requests.get('https://discord.com/api/v9/users/@me',headers=headers)
     tokentype='User'
-    if resp.status_code !=200 or 'message' not in resp.json():
-        try:
-            headers=botheaders(token)
-            resp=requests.get('https://discord.com/api/v9/users/@me',headers=headers)
-            tokentype='Bot'
-        except:
+    if resp.status_code != 200 or 'message' in resp.json():
+        headers=botheaders(token)
+        resp=requests.get('https://discord.com/api/v9/users/@me',headers=headers)
+        tokentype='Bot'
+        if resp.status_code != 200:
             return f'{fore.RED}{fore.RED}{resp.status_code} Error |{fore.RESET} Invalid token\n {fore.RESET}'
 
     guilds=requests.get('https://discord.com/api/v9/users/@me/guilds',headers=headers).json()

@@ -248,7 +248,7 @@ def fast_parse(tokens):
         position+=1
         if res.status_code==200:
             valids.write(f'{tokens[position-1]}\n')
-            print(f'{fore.GREEN}[+] {fore.YELLOW}{tokens[position-1]} | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Valid user token')
+            print(f'{fore.GREEN}[+] {fore.YELLOW}{tokens[position-1]} |{fore.GREEN} {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Valid user token')
             intvalids+=1
         else:
             print(f'{fore.RED}[-] {fore.YELLOW}{tokens[position-1]}{fore.RED} | Invalid user token')

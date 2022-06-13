@@ -186,7 +186,7 @@ def parse(tokens):
         if valid:
             nitro=len(requests.get('https://discord.com/api/v9/users/@me/billing/subscriptions',headers=userheaders(token)).json()) > 0
             payment=requests.get('https://discord.com/api/v9/users/@me/billing/payment-sources',headers=userheaders(token)).json()
-            if len(payment)>0: payment=len([payment for paymentt in payment if not payment['invalid']])>0
+            if len(payment)>0: payment=len([payment for paymentt in payment if not paymentt['invalid']])>0
             else: payment=False
 
         else:

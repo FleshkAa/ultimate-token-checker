@@ -1,4 +1,4 @@
-__version__='1.1'
+__version__='1.1.0.25'
 """
 █▀▀ █   █▀▀ █▀▀ █  █ █ █ █▀▀█ 
 █▀▀ █   █▀▀ ▀▀█ █▀▀█ █▀▄ █▄▄█ 
@@ -169,6 +169,7 @@ def parse(tokens):
     payments=open(dir_name + r'\payments.txt','a')
     bots=open(dir_name + r'\bots.txt','a')
     nitros=open(dir_name+r'\nitro.txt','a')
+    onlyvalids=open(dir_name+r'\onlyvalids.txt','a')
 
 
     intvalids=0
@@ -210,6 +211,7 @@ def parse(tokens):
 
             else:
                 valids.write(f'{token}\n')
+                onlyvalids.write(f'{token}\n')
                 print(f'{fore.GREEN}[+] {fore.YELLOW}{token}{fore.GREEN}  | {res.json()["username"]}#{res.json()["discriminator"]} ({fore.YELLOW}{res.json()["id"]}{fore.GREEN}){fore.CYAN} | Valid user token')
                 intvalids+=1
 

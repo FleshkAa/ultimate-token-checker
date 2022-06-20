@@ -12,9 +12,9 @@ First, if you don't have Python installed, <a href="https://www.python.org/downl
 Next, run checker.py through the console:
 ```sh
 # Windows: 
-py -3 -m checker
+py -3 checker.py
 # Linux\MacOS 
-python3 -m checker
+python3 checker.py
 ```
 And select mode
 1) In single mode, you get full information from the token
